@@ -6,7 +6,7 @@ import AvailableWorkout from './AvailableWorkout';
 // import ChooseWorkout from './ChooseWorkout';
 
 export default function ChooseWorkout(props) {
-  const { getWorkout } = props;
+  const { pickWorkout } = props;
 
 
   const testWorkouts = [
@@ -84,7 +84,7 @@ export default function ChooseWorkout(props) {
   const availableWorkouts = testWorkouts
     .filter(e => e.available)
     .map(e => (
-      <AvailableWorkout getWorkout={getWorkout} workout={e} key={e.id} />
+      <AvailableWorkout pickWorkout={pickWorkout} workout={e} key={e.id} />
     ))
 
   const windowHeight = window.innerHeight;

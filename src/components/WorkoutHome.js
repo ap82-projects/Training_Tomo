@@ -10,24 +10,30 @@ import { useCollectionData } from 'react-firebase-hooks/firestore';
 export default function WorkoutHome(props) {
   const { user, auth, firestore } = props;
   const [selectedWorkout, setSelectedWorkout] = useState("");
-
+  // const [loggedIn, setLoggedIn] = useState(true)
   const socket = io('ws://localhost:8080');
+  
   socket.on('message', text => {
     console.log(text);
   });
-  console.log("post-socket")
-  socket.emit('message', `${user.displayName} logging in`)
-
-  const getWorkout = workoutId => {
+  socket.emit('message', `${user.displayName}`)
+    // socket.emit('joinWorkout', {name: "me", workout: "123"})
+  
+  const pickWorkout = workoutId => {
     setSelectedWorkout(workoutId);
+    socket.emit('joinWorkout', {userId: user.providerData[0].uid, userName: user.displayName, workout: workoutId})
     console.log(selectedWorkout)
   }
 
+  const leaveWorkout = workoutId => {
+    socket.emit('leaveWorkout', {userId: user.providerData[0].uid, userName: user.displayName, workout: workoutId})
+    setSelectedWorkout("");
+  }
 
   return (
     <React.Fragment>
       <UserHeader auth={auth} user={user} />
-      {selectedWorkout ? <RaceWorkout getWorkout={getWorkout} /> : <ChooseWorkout getWorkout={getWorkout} />}
+      {selectedWorkout ? <RaceWorkout socket={socket} user={user} selectedWorkout={selectedWorkout} leaveWorkout={leaveWorkout} /> : <ChooseWorkout socket={socket} pickWorkout={pickWorkout} />}
     </React.Fragment>
   )
 }

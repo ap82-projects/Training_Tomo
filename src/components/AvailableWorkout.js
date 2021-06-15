@@ -44,7 +44,7 @@ export default function AvailableWorkout(props) {
           {exercises}
         </Card.Body>
         <Card.Footer>
-          <Button id={props.workout.id} variant="success" onClick={(e) => props.getWorkout(e.target.id)}>Join Workout</Button>
+          <Button id={props.workout.id} variant="success" onClick={(e) => props.pickWorkout(e.target.id)}>Join Workout</Button>
         </Card.Footer>
       </Card>
   )
