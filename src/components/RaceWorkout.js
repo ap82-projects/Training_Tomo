@@ -7,7 +7,8 @@ export default function RaceWorkout(props) {
   return (
     <div>
       <h1>GO!!!</h1>
-      <Button onClick={() => getWorkout("")}>Quit Workout</Button>
+      <Button variant="success" onClick={() => console.log("Finished Current Exercise")}>Finished Exercise</Button>
+      <Button variant="danger" onClick={() => getWorkout("")}>Quit Workout</Button>
     </div>
   )
 }

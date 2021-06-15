@@ -5,6 +5,7 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
+// import io from 'socket.io-client';
 // import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 firebase.initializeApp({
@@ -22,7 +23,13 @@ const firestore = firebase.firestore();
 
 function App() {
   const [user] = useAuthState(auth);
-  
+  // console.log("pre-socket")
+  // const socket = io('ws://localhost:8080');
+  // socket.on('message', text => {
+  //   console.log(text);
+  // });
+  // console.log("post-socket")
+  // socket.emit('message', "HI THERE SOCKET!!!")
   return (
     <div className="App">
       {/* <header className="App-header"> */}
