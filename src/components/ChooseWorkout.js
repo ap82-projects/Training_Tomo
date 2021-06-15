@@ -1,17 +1,19 @@
-import React from "react"
-import Button from "react-bootstrap/Button"
+import React, { useState } from "react"
+// import Button from "react-bootstrap/Button"
 import 'bootstrap/dist/css/bootstrap.min.css'
-import UserHeader from './UserHeader';
+// import UserHeader from './UserHeader';
 import AvailableWorkout from './AvailableWorkout';
+// import ChooseWorkout from './ChooseWorkout';
 
 export default function ChooseWorkout(props) {
-  const { user, auth } = props;
+  const { getWorkout } = props;
+
 
   const testWorkouts = [
     {
       id: "000",
-      available: true,
       name: "Workout 1",
+      available: true,
       exercises: [
         {
           name: "Exercise 1",
@@ -30,7 +32,7 @@ export default function ChooseWorkout(props) {
     {
       id: "001",
       name: "Workout 2",
-      available: false,
+      available: true,
       exercises: [
         {
           name: "Exercise 4",
@@ -79,20 +81,18 @@ export default function ChooseWorkout(props) {
     }
   ]
 
-  const workouts = testWorkouts
+  const availableWorkouts = testWorkouts
     .filter(e => e.available)
     .map(e => (
-      <AvailableWorkout workout={e} />
+      <AvailableWorkout getWorkout={getWorkout} workout={e} key={e.id} />
     ))
 
+  const windowHeight = window.innerHeight;
+  const window80 = Math.floor(windowHeight * .8)
   return (
-    <div>
-      <UserHeader auth={auth} user={user} />
-
-      <div>
-        <h3>Available Workouts</h3>
-        {workouts}
-      </div>
+    <div style={{overflow: "scroll", height: `${window80}px` }}>
+      <h3>Available Workouts</h3>
+      {availableWorkouts}
     </div>
   )
 }

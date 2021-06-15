@@ -1,17 +1,27 @@
 import React from "react"
 import Button from "react-bootstrap/Button"
+import Card from "react-bootstrap/Card"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function UserHeader(props) {
   const { user, auth } = props;
-  
-  
-  return (
-    <div>
-      <p>Hello { user.displayName }</p>
-      <img src={`https://robohash.org/${encodeURIComponent(user.displayName)}?set=set3`}></img>
 
-      <Button variant="danger" onClick={() => auth.signOut()}>Sign Out</Button>
-    </div>
+  const windowHeight = window.innerHeight;
+  const window20 = Math.floor(windowHeight * .2)
+  return (
+    <Card style={{ color: "black", height: `${window20}px`}}>
+      <Row>
+        <Col>
+          <Card.Img src={`https://robohash.org/${encodeURIComponent(user.displayName)}?set=set3`} />
+        </Col>
+        <Col>
+          <Card.Text>Logged in as</Card.Text>
+          <Card.Text>{user.displayName}</Card.Text>
+          <Button variant="danger" onClick={() => auth.signOut()}>Sign Out</Button>
+        </Col>
+      </Row>
+    </Card>
   )
 }

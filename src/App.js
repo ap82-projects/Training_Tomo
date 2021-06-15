@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import ChooseWorkout from './components/ChooseWorkout';
+import WorkoutHome from './components/WorkoutHome';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -17,23 +17,19 @@ firebase.initializeApp({
 });
 
 const auth = firebase.auth();
-// const firestore = firebase.firestore();
+const firestore = firebase.firestore();
 
 
 function App() {
-  console.log("app")
   const [user] = useAuthState(auth);
-
+  
   return (
     <div className="App">
-      <header className="App-header">
+      {/* <header className="App-header"> */}
       <section>
-        {/* {user ? <SignOut usr={user}/> : <SignIn />} */}
-        {user ? <ChooseWorkout user={user} auth={auth}/> : <SignIn />}
+        {user ? <WorkoutHome user={user} auth={auth} firestore={firestore}/> : <SignIn />}
       </section>
-        
-      </header>
-
+      {/* </header> */}
     </div>
   );
 }
@@ -49,13 +45,5 @@ function SignIn() {
     <button onClick={signInWithGoogle}>Sign in with Google</button>
   )
 }
-
-// function SignOut(props) {
-//   console.log(props.usr)
-//   console.log(auth.currentUser)
-//   return auth.currentUser && (
-//     <button onClick={() => auth.signOut()}>Sign Out {props.usr.displayName}</button>
-//   )
-// }
 
 export default App;
