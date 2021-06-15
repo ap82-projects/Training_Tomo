@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
 const port = 5000
+const testWorkouts = require('./testWorkouts.js')
 
 const workoutRooms = {}
 const http = require('http').createServer();
 const io = require('socket.io')(http, {
   cors: { origin: "*" }
 })
+
 io.on('connection', socket => {
   console.log('user connected via socket');
   socket.on('message', user => {
@@ -14,9 +16,6 @@ io.on('connection', socket => {
     io.emit('message', `${socket.id.substr(0, 2)} said you are now connected`)
   })
   socket.on('joinWorkout', idAndWorkout => {
-    console.log("join")
-    console.log(workoutRooms)
-    console.log(idAndWorkout);
     if (!workoutRooms[idAndWorkout.workout]) {
       workoutRooms[idAndWorkout.workout] = {}
     }
@@ -24,7 +23,9 @@ io.on('connection', socket => {
     workoutRooms[idAndWorkout.workout][idAndWorkout.userId].name = idAndWorkout.userName;
     workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress = [];
     //next need to push falses for each exercise in workout
-    console.log(workoutRooms);
+    testWorkouts
+      .filter(e => e.id === idAndWorkout.workout)[0].exercises
+      .forEach(() => workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress.push(false));
     // io.emit('message', `${socket.id.substr(0,2)} said you are now connected`)
   })
   socket.on('leaveWorkout', idAndWorkout => {
@@ -35,10 +36,11 @@ io.on('connection', socket => {
     }
     console.log(workoutRooms);
   })
-  socket.on('completedExercise', nameAndWorkout => {
-    console.log(nameAndWorkout)
-    workoutRooms.push(nameAndWorkout)
-    io.emit('completedExercise', workoutRooms)
+  socket.on('completedExercise', idAndWorkout => {
+    workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress.unshift(true);
+    workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress.pop();
+    console.log(workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress)
+    // io.emit('completedExercise', workoutRooms)
   })
   
 })

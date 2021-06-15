@@ -12,7 +12,7 @@ export default function RaceWorkout(props) {
   console.log(user.providerData[0].displayName)
   console.log(user.providerData[0].uid)
   const complete = () => {
-    socket.emit('completedExercise', {id: user.providerData[0].uid, workout: "thisOne"})
+    socket.emit('completedExercise', {userId: user.providerData[0].uid, userName: user.displayName,  workout: "000"})
   }
   // console.log('refresh')
   /*
