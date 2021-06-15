@@ -5,7 +5,7 @@ import UserHeader from './UserHeader';
 import ChooseWorkout from './ChooseWorkout';
 import RaceWorkout from './RaceWorkout';
 import io from 'socket.io-client';
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+// import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 export default function WorkoutHome(props) {
   const { user, auth, firestore } = props;
@@ -13,9 +13,7 @@ export default function WorkoutHome(props) {
   // const [loggedIn, setLoggedIn] = useState(true)
   const socket = io('ws://localhost:8080');
   
-  socket.on('message', text => {
-    console.log(text);
-  });
+  
   socket.emit('message', `${user.displayName}`)
     // socket.emit('joinWorkout', {name: "me", workout: "123"})
   

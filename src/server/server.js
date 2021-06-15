@@ -11,9 +11,12 @@ const io = require('socket.io')(http, {
 
 io.on('connection', socket => {
   console.log('user connected via socket');
-  socket.on('message', user => {
-    console.log(`${user} has connected`)
-    io.emit('message', `${socket.id.substr(0, 2)} said you are now connected`)
+  io.emit('getWorkouts', testWorkouts)
+  socket.on('getWorkouts', () => {
+    // console.log(`${user} has connected`)
+    console.log('sending workouts')
+    // io.emit('message', `${socket.id.substr(0, 2)} said you are now connected`)
+    io.emit('getWorkouts', testWorkouts)
   })
   socket.on('joinWorkout', idAndWorkout => {
     if (!workoutRooms[idAndWorkout.workout]) {
