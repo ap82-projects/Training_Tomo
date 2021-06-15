@@ -50,12 +50,12 @@ function SignIn() {
   )
 }
 
-function SignOut(props) {
-  console.log(props.usr)
-  console.log(auth.currentUser)
-  return auth.currentUser && (
-    <button onClick={() => auth.signOut()}>Sign Out {props.usr.displayName}</button>
-  )
-}
+// function SignOut(props) {
+//   console.log(props.usr)
+//   console.log(auth.currentUser)
+//   return auth.currentUser && (
+//     <button onClick={() => auth.signOut()}>Sign Out {props.usr.displayName}</button>
+//   )
+// }
 
 export default App;
