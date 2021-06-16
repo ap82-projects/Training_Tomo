@@ -66,7 +66,7 @@ io.on('connection', socket => {
   })
 });
 
-http.listen(8080, () => console.log('socket server on 8080'));
+http.listen(process.env.PORT || 8080, () => console.log('socket server on 8080'));
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
