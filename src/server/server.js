@@ -1,5 +1,5 @@
-// const express = require('express')
-// const app = express()
+const express = require('express')
+const app = express()
 // const port = process.env.EXPRESS_PORT;
 const port = process.env.PORT || 5000;
 const testWorkouts = require('./testWorkouts.js')
@@ -78,3 +78,7 @@ http.listen(port, () => console.log(`socket server on port ${port}`));
 // app.listen(port, () => {
 //   console.log(`express listening at http://localhost:${port}`);
 // });
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
+});
