@@ -12,14 +12,18 @@ export default function WorkoutHome(props) {
   const [selectedWorkout, setSelectedWorkout] = useState("");
   // const [loggedIn, setLoggedIn] = useState(true)
   const socket = io('ws://localhost:8080');
+  // const socket = io(process.env.SERVER_URL);
   
   
   socket.emit('message', `${user.displayName}`)
     // socket.emit('joinWorkout', {name: "me", workout: "123"})
   
   const pickWorkout = workoutId => {
+    console.log('workout id')
+    console.log(workoutId)
     setSelectedWorkout(workoutId);
-    socket.emit('joinWorkout', {userId: user.providerData[0].uid, userName: user.displayName, workout: workoutId})
+    // socket.emit('joinWorkout', {userId: user.providerData[0].uid, userName: user.displayName, workout: workoutId})
+    console.log('selected workout')
     console.log(selectedWorkout)
   }
 
@@ -30,8 +34,10 @@ export default function WorkoutHome(props) {
 
   return (
     <React.Fragment>
-      <UserHeader auth={auth} user={user} />
-      {selectedWorkout ? <RaceWorkout socket={socket} user={user} selectedWorkout={selectedWorkout} leaveWorkout={leaveWorkout} /> : <ChooseWorkout socket={socket} pickWorkout={pickWorkout} />}
+      <UserHeader selectedWorkout={selectedWorkout} leaveWorkout={leaveWorkout} auth={auth} user={user} />
+      {selectedWorkout ? 
+        <RaceWorkout socket={socket} user={user} selectedWorkout={selectedWorkout} leaveWorkout={leaveWorkout} /> : 
+        <ChooseWorkout socket={socket} pickWorkout={pickWorkout} />}
     </React.Fragment>
   )
 }

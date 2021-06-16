@@ -6,7 +6,7 @@ import Col from "react-bootstrap/Col"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function UserHeader(props) {
-  const { user, auth } = props;
+  const { user, auth, selectedWorkout, leaveWorkout } = props;
 
   const windowHeight = window.innerHeight;
   const window20 = Math.floor(windowHeight * .2)
@@ -19,7 +19,10 @@ export default function UserHeader(props) {
         <Col>
           <Card.Text>Logged in as</Card.Text>
           <Card.Text>{user.displayName}</Card.Text>
+          {selectedWorkout ?
+          <Button variant="danger" onClick={() => leaveWorkout(selectedWorkout)}>Quit Workout</Button> :
           <Button variant="danger" onClick={() => auth.signOut()}>Sign Out</Button>
+          }
         </Col>
       </Row>
     </Card>
