@@ -11,8 +11,11 @@ export default function WorkoutHome(props) {
   const { user, auth, firestore } = props;
   const [selectedWorkout, setSelectedWorkout] = useState("");
   // const [loggedIn, setLoggedIn] = useState(true)
-  const socket = io('ws://localhost:8080');
+  // const socket = io('ws://localhost:5000');
+  const socket = io(`${process.env.SERVER_URL || "ws://localhost"}:${process.env.PORT || "5000"}`);
   // const socket = io(process.env.SERVER_URL);
+  console.log(socket)
+  console.log(`${process.env.SERVER_URL || "ws://localhost"}:${process.env.PORT || "5000"}`)
   
   
   socket.emit('message', `${user.displayName}`)

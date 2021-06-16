@@ -1,9 +1,12 @@
-const express = require('express')
-const app = express()
-const port = process.env.EXPRESS_PORT;
+// const express = require('express')
+// const app = express()
+// const port = process.env.EXPRESS_PORT;
+const port = process.env.PORT || 5000;
 const testWorkouts = require('./testWorkouts.js')
 
 const workoutRooms = {}
+
+
 const http = require('http').createServer();
 const io = require('socket.io')(http, {
   cors: { origin: "*" }
@@ -66,12 +69,12 @@ io.on('connection', socket => {
   })
 });
 
-http.listen(SOCKET_PORT, () => console.log('socket server on 8080'));
+http.listen(port, () => console.log(`socket server on port ${port}`));
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello World!');
+// });
 
-app.listen(port, () => {
-  console.log(`express listening at http://localhost:${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`express listening at http://localhost:${port}`);
+// });
