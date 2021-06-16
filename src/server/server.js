@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 5000
+const port = process.env.EXPRESS_PORT;
 const testWorkouts = require('./testWorkouts.js')
 
 const workoutRooms = {}
@@ -66,7 +66,7 @@ io.on('connection', socket => {
   })
 });
 
-http.listen(process.env.PORT || 8080, () => console.log('socket server on 8080'));
+http.listen(SOCKET_PORT, () => console.log('socket server on 8080'));
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
