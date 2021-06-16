@@ -19,24 +19,29 @@ export default function RaceWorkout(props) {
   socket.on('roomStatus', status => {
     setRoomStatus(status);
     // console.log('room status')
-    // console.log(roomStatus)
+    console.log(roomStatus)
     // console.log(status)
+  });
+  socket.on('allReady', letsGo => {
+    setAllReady(true);
+  });
+  socket.on('winner', user => {
+    setWinner(user);
   })
+
   useEffect(() => {
     socket.emit('joinWorkout', { userId: user.providerData[0].uid, userName: user.displayName, workout: selectedWorkout });
   }, []);
 
 
-  // console.log(user.providerData[0].displayName)
-  // console.log(user.providerData[0].uid)
-  // socket.emit('joinWorkout', {userId: user.providerData[0].uid, userName: user.displayName, workout: selectedWorkout})
-  console.log(selectedWorkout)
   const complete = () => {
     socket.emit('completedExercise', { userId: user.providerData[0].uid, userName: user.displayName, workout: selectedWorkout})
   }
 
-  const otherUsers = Object.keys(roomStatus).length ? Object.keys(roomStatus[selectedWorkout])
-    .filter(e => e !== user.providerData[0].uid) : []
+  const makeReady = () => {
+    setReady(true);
+    socket.emit('ready', { userId: user.providerData[0].uid, workout: selectedWorkout})
+  }
 
   const OtherUsers = Object.keys(roomStatus).length ? Object.keys(roomStatus[selectedWorkout])
     .filter(e => e !== user.providerData[0].uid)
@@ -45,6 +50,7 @@ export default function RaceWorkout(props) {
         <Row>
           <Col>
             <Card.Img src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout][user].name)}?set=set3`} />
+            <Card.Text>{roomStatus[selectedWorkout][user].ready ? "Ready" : "Waiting"}</Card.Text>
           </Col>
           <Col>
             {roomStatus[selectedWorkout][user].progress.map((completed, i) => (
@@ -85,7 +91,7 @@ export default function RaceWorkout(props) {
         return (
           <React.Fragment>
             <h1>READY?</h1>
-            <Button variant="danger" onClick={() => setReady(true)}>I'm Ready!</Button>
+            <Button variant="danger" onClick={() => makeReady()}>I'm Ready!</Button>
           </React.Fragment>
         );
       }

@@ -24,6 +24,7 @@ io.on('connection', socket => {
     workoutRooms[idAndWorkout.workout][idAndWorkout.userId] = {}
     workoutRooms[idAndWorkout.workout][idAndWorkout.userId].name = idAndWorkout.userName;
     workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress = [];
+    workoutRooms[idAndWorkout.workout][idAndWorkout.userId].ready = false;
     //next need to push falses for each exercise in workout
     testWorkouts
       .filter(e => e.id === idAndWorkout.workout)[0].exercises
@@ -49,7 +50,20 @@ io.on('connection', socket => {
     console.log(workoutRooms[idAndWorkout.workout][idAndWorkout.userId])
     io.emit('completedExercise', workoutRooms)
     io.emit('roomStatus', workoutRooms)
-  });  
+    if (workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress.every(e => e)) {
+      io.emit('winner', idAndWorkout.userId);
+    }
+  });
+
+  socket.on('ready', readyUser => {
+    workoutRooms[readyUser.workout][readyUser.userId].ready = true;
+    io.emit('roomStatus', workoutRooms);
+    const areAllReady = Object.keys(workoutRooms[readyUser.workout])
+      .every(user => workoutRooms[readyUser.workout][user].ready);
+    if (areAllReady) {
+      io.emit('allReady', true);
+    }
+  })
 });
 
 http.listen(8080, () => console.log('socket server on 8080'));
