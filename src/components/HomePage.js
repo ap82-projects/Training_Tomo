@@ -7,15 +7,15 @@ import io from 'socket.io-client';
 
 export default function HomePage(props) {
   const { user, auth } = props;
-  const [selectedWorkout, setSelectedWorkout] = useState("");
+  const [selectedWorkout, setSelectedWorkout] = useState();
   const socket = io();
   
   socket.emit('message', `${user.displayName}`)
   
-  const pickWorkout = workoutId => {
-    console.log('workout id')
-    console.log(workoutId)
-    setSelectedWorkout(workoutId);
+  const pickWorkout = workout => {
+    console.log('workout')
+    console.log(workout)
+    setSelectedWorkout(workout);
     console.log('selected workout')
     console.log(selectedWorkout)
   }

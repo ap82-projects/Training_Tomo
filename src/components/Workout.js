@@ -30,7 +30,8 @@ export default function Workout(props) {
           {exercises}
         </Card.Body>
         <Card.Footer>
-          <Button id={workout.id} variant="success" onClick={(e) => pickWorkout(e.target.id)}>Join Workout</Button>
+          {/* <Button id={workout.id} variant="success" onClick={(e) => pickWorkout(e.target.id)}>Join Workout</Button> */}
+          <Button id={workout.id} variant="success" onClick={(e) => pickWorkout(workout)}>Join Workout</Button>
         </Card.Footer>
       </Card>
   )

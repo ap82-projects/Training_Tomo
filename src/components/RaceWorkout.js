@@ -6,11 +6,19 @@ import Col from "react-bootstrap/Col"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function RaceWorkout(props) {
-  const { socket, user, selectedWorkout, leaveWorkout } = props;
+  const {
+    socket,
+    user,
+    selectedWorkout,
+    leaveWorkout
+  } = props;
   const [roomStatus, setRoomStatus] = useState({});
   const [winner, setWinner] = useState("");
   const [ready, setReady] = useState(false);
   const [allReady, setAllReady] = useState(false);
+  const [currentExercise, setCurrentExercise] = useState(0);
+  console.log("selectedWorkout")
+  console.log(selectedWorkout)
 
   socket.on('completedExercise', nameAndWorkout => {
     console.log('completed exercise')
@@ -19,7 +27,7 @@ export default function RaceWorkout(props) {
   socket.on('roomStatus', status => {
     setRoomStatus(status);
     // console.log('room status')
-    console.log(roomStatus)
+    console.log(status)
     // console.log(status)
   });
   socket.on('allReady', letsGo => {
@@ -30,30 +38,31 @@ export default function RaceWorkout(props) {
   })
 
   useEffect(() => {
-    socket.emit('joinWorkout', { userId: user.providerData[0].uid, userName: user.displayName, workout: selectedWorkout });
+    socket.emit('joinWorkout', { userId: user.providerData[0].uid, userName: user.displayName, workout: selectedWorkout.id });
   }, []);
 
 
   const complete = () => {
-    socket.emit('completedExercise', { userId: user.providerData[0].uid, userName: user.displayName, workout: selectedWorkout})
+    socket.emit('completedExercise', { userId: user.providerData[0].uid, userName: user.displayName, workout: selectedWorkout.id})
+    setCurrentExercise(currentExercise === selectedWorkout.exercises.length - 1 ? currentExercise : currentExercise + 1)
   }
 
   const makeReady = () => {
     setReady(true);
-    socket.emit('ready', { userId: user.providerData[0].uid, workout: selectedWorkout})
+    socket.emit('ready', { userId: user.providerData[0].uid, workout: selectedWorkout.id})
   }
 
-  const OtherUsers = Object.keys(roomStatus).length ? Object.keys(roomStatus[selectedWorkout])
+  const OtherUsers = Object.keys(roomStatus).length ? Object.keys(roomStatus[selectedWorkout.id])
     .filter(e => e !== user.providerData[0].uid)
     .map(user => (
       <Card>
         <Row>
           <Col>
-            <Card.Img src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout][user].name)}?set=set3`} />
-            <Card.Text>{roomStatus[selectedWorkout][user].ready ? "Ready" : "Waiting"}</Card.Text>
+            <Card.Img src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout.id][user].name)}?set=set3`} />
+            <Card.Text>{roomStatus[selectedWorkout.id][user].ready ? "Ready" : "Waiting"}</Card.Text>
           </Col>
           <Col>
-            {roomStatus[selectedWorkout][user].progress.map((completed, i) => (
+            {roomStatus[selectedWorkout.id][user].progress.map((completed, i) => (
               <Button variant={completed ? "primary" : "warning"} />
             ))}
           </Col>
@@ -67,7 +76,7 @@ export default function RaceWorkout(props) {
   // console.log(Boolean(Object.keys(roomStatus).length))
 
   const SelfProgress = Object.keys(roomStatus).length ?
-    roomStatus[selectedWorkout][user.providerData[0].uid].progress.map((completed, i) => (
+    roomStatus[selectedWorkout.id][user.providerData[0].uid].progress.map((completed, i) => (
       <Button variant={completed ? "primary" : "warning"} />
     )) : <Button variant="warning">Loading</Button>
 
@@ -77,6 +86,7 @@ export default function RaceWorkout(props) {
         return (
           <React.Fragment>
             <h1>GO!!!</h1>
+            <h2>{selectedWorkout.exercises[currentExercise].name} x{selectedWorkout.exercises[currentExercise].reps}</h2>
             <Button variant="primary" onClick={() => complete()}>Finished Exercise</Button>
           </React.Fragment>
         );
