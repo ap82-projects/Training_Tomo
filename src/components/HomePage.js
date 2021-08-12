@@ -2,23 +2,16 @@ import React, { useState } from "react"
 // import Button from "react-bootstrap/Button"
 import 'bootstrap/dist/css/bootstrap.min.css'
 import UserHeader from './UserHeader';
-import ChooseWorkout from './ChooseWorkout';
+import Workouts from './Workouts';
 import RaceWorkout from './RaceWorkout';
 import io from 'socket.io-client';
 // import { useCollectionData } from 'react-firebase-hooks/firestore';
 
-export default function WorkoutHome(props) {
+export default function HomePage(props) {
   const { user, auth, firestore } = props;
   const [selectedWorkout, setSelectedWorkout] = useState("");
   // const [loggedIn, setLoggedIn] = useState(true)
-  // const socket = io('ws://localhost:5000');
-  // const socket = io(`${process.env.SERVER_URL || "ws://localhost"}:${process.env.PORT || "5000"}`);
   const socket = io();
-  // const socket = io(process.env.SERVER_URL);
-  console.log('socket connection')
-  console.log(socket)
-  // console.log(`${process.env.SERVER_URL || "ws://localhost"}:${process.env.EXPRESS_PORT || "5000"}`)
-  // console.log(user)
   
   socket.emit('message', `${user.displayName}`)
     // socket.emit('joinWorkout', {name: "me", workout: "123"})
@@ -42,7 +35,7 @@ export default function WorkoutHome(props) {
       <UserHeader selectedWorkout={selectedWorkout} leaveWorkout={leaveWorkout} auth={auth} user={user} />
       {selectedWorkout ? 
         <RaceWorkout socket={socket} user={user} selectedWorkout={selectedWorkout} leaveWorkout={leaveWorkout} /> : 
-        <ChooseWorkout socket={socket} pickWorkout={pickWorkout} />}
+        <Workouts socket={socket} pickWorkout={pickWorkout} />}
     </React.Fragment>
   )
 }

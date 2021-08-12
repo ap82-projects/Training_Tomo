@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './App.css';
-import WorkoutHome from './components/WorkoutHome';
+import HomePage from './components/HomePage';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -28,7 +28,7 @@ function App() {
     <div className="App">
       {/* <header className="App-header"> */}
       <section>
-        {user ? <WorkoutHome user={user} auth={auth} firestore={firestore}/> : <SignIn />}
+        {user ? <HomePage user={user} auth={auth} firestore={firestore}/> : <SignIn />}
       </section>
       {/* </header> */}
     </div>

@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 
-export default function AvailableWorkout(props) {
+export default function Workout(props) {
   /* props.workout should have all the workout data as follows
   {
     id: (workout id)

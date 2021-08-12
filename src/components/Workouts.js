@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react"
 // import Button from "react-bootstrap/Button"
 import 'bootstrap/dist/css/bootstrap.min.css'
 // import UserHeader from './UserHeader';
-import AvailableWorkout from './AvailableWorkout';
+import Workout from './Workout';
 // import ChooseWorkout from './ChooseWorkout';
 
-export default function ChooseWorkout(props) {
+export default function Workouts(props) {
   const { pickWorkout, socket } = props;
   const [workouts, setWorkouts] = useState([]);
   
@@ -14,13 +14,14 @@ export default function ChooseWorkout(props) {
       setWorkouts(data);
     };
   });
+  console.log('Workouts')
   console.log(workouts)
 
   
   const availableWorkouts = workouts
   .filter(e => e.available)
   .map(e => (
-    <AvailableWorkout pickWorkout={pickWorkout} workout={e} key={e.id} />
+    <Workout pickWorkout={pickWorkout} workout={e} key={e.id} />
     ))
     
     const windowHeight = window.innerHeight;
