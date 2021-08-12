@@ -1,16 +1,37 @@
 const express = require('express')
 const app = express()
 // const port = process.env.EXPRESS_PORT;
+
 const port = process.env.PORT || 5000;
 const testWorkouts = require('./testWorkouts.js')
-
-const workoutRooms = {}
-
+const cors = require('cors')
 
 const http = require('http').createServer();
 const io = require('socket.io')(http, {
   cors: { origin: "*" }
-})
+});
+
+app.listen(port, () => {
+  console.log(`express listening on port :${port}`);
+});
+
+app.get('/express_backend', (req, res) => { //Line 9
+  res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
+}); //Line 11
+
+const workoutRooms = {}
+
+// const socketIO = require('socket.io');
+// const PORT = process.env.PORT || 3000;
+// const INDEX = '../public/index.html';
+
+
+// const server = express()
+//   .use((req, res) => res.sendFile(INDEX, { root: __dirname }))
+//   .use(cors())
+//   .listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+//   const io = socketIO(server);
 
 io.on('connection', socket => {
   console.log('user connected via socket');
@@ -69,16 +90,13 @@ io.on('connection', socket => {
   })
 });
 
-http.listen(port, () => console.log(`socket server on port ${port}`));
+// http.listen(port, () => console.log(`socket server on port ${port}`));
 
 // app.get('/', (req, res) => {
 //   res.send('Hello World!');
 // });
 
-// app.listen(port, () => {
-//   console.log(`express listening at http://localhost:${port}`);
-// });
 
-app.get("*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.resolve(__dirname, "..", "dist", "index.html"));
+// });
