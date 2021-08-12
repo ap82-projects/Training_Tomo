@@ -1,12 +1,14 @@
 const express = require('express')
-const app = express()
-// const port = process.env.EXPRESS_PORT;
-
-const port = process.env.PORT || 5000;
-const testWorkouts = require('./testWorkouts.js')
 const cors = require('cors')
-
 const http = require('http').createServer();
+const testWorkouts = require('./testWorkouts.js')
+const port = process.env.EXPRESS_PORT || 5000;
+
+const app = express()
+app.use(cors());
+app.use(express.json());
+app.use(express.static('build'));
+
 const io = require('socket.io')(http, {
   cors: { origin: "*" }
 });
@@ -14,6 +16,7 @@ const io = require('socket.io')(http, {
 app.listen(port, () => {
   console.log(`express listening on port :${port}`);
 });
+
 
 app.get('/express_backend', (req, res) => { //Line 9
   res.send({ express: 'YOUR EXPRESS BACKEND IS CONNECTED TO REACT' }); //Line 10
