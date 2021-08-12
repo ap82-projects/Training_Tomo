@@ -1,7 +1,6 @@
 const express = require('express')
 const cors = require('cors')
-const socket = require('socket.io')
-const http = require('http').createServer();
+const socketIo = require('socket.io')
 const testWorkouts = require('./testWorkouts.js')
 const port = process.env.PORT || 5000;
 
@@ -16,17 +15,25 @@ const server = app.listen(port, () => {
 
 const workoutRooms = {}
 
-const io = socket(server)
+const io = socketIo(server)
 
 io.on('connection', socket => {
   console.log('user connected via socket');
+  console.log('connection id: ', socket.id)
   io.emit('getWorkouts', testWorkouts)
 
+  socket.on('disconnect', reason => {
+    console.log('user disconnected:')
+    console.log(reason)
+  })
+
   socket.on('getWorkouts', () => {
+    console.log('getting workouts')
     io.emit('getWorkouts', testWorkouts)
   });
 
   socket.on('joinWorkout', idAndWorkout => {
+    console.log('user joining workout')
     if (!workoutRooms[idAndWorkout.workout]) {
       workoutRooms[idAndWorkout.workout] = {}
     }
@@ -55,7 +62,6 @@ io.on('connection', socket => {
   socket.on('completedExercise', idAndWorkout => {
     workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress.unshift(true);
     workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress.pop();
-    // console.log(workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress)
     console.log(workoutRooms[idAndWorkout.workout][idAndWorkout.userId])
     io.emit('completedExercise', workoutRooms)
     io.emit('roomStatus', workoutRooms)

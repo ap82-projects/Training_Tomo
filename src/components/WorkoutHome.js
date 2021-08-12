@@ -15,9 +15,10 @@ export default function WorkoutHome(props) {
   // const socket = io(`${process.env.SERVER_URL || "ws://localhost"}:${process.env.PORT || "5000"}`);
   const socket = io();
   // const socket = io(process.env.SERVER_URL);
+  console.log('socket connection')
   console.log(socket)
-  console.log(`${process.env.SERVER_URL || "ws://localhost"}:${process.env.EXPRESS_PORT || "5000"}`)
-  console.log(user)
+  // console.log(`${process.env.SERVER_URL || "ws://localhost"}:${process.env.EXPRESS_PORT || "5000"}`)
+  // console.log(user)
   
   socket.emit('message', `${user.displayName}`)
     // socket.emit('joinWorkout', {name: "me", workout: "123"})
