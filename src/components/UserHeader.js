@@ -15,9 +15,12 @@ export default function UserHeader(props) {
     <div className="UserHeader">
       {/* <Card style={{ color: "black", height: `${window20}px` }}> */}
       <div className="card" style={{ color: "black", height: `${window20}px` }}>
-        <div className="row">
-          <div className="col">
-            <img className="card-img" src={`https://robohash.org/${encodeURIComponent(user.displayName)}?set=set3`} />
+        <div className="row" style={{ height: "100%" }}>
+          <div className="col" style={{ height: "100%" }}>
+            <img className="card-img"
+              src={`https://robohash.org/${encodeURIComponent(user.displayName)}?set=set3`}
+              style={{ height: "100%", objectFit: "contain" }}  
+            />
           </div>
           <div className="col">
             <p className="card-text">Logged in as</p>

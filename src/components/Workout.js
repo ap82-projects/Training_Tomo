@@ -22,7 +22,7 @@ export default function Workout(props) {
   ))
 
   return (
-      <div className="card" style={{ color: "black" }} className="m-2">
+      <div className="card m-d" style={{ color: "black", width:"50%" }}>
         <div className="card-header">
           <h5 className="card-title">{workout.name}</h5>
         </div>
