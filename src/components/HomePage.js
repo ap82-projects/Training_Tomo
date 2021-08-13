@@ -29,7 +29,7 @@ export default function HomePage(props) {
     <div className="HomePage">
       <UserHeader selectedWorkout={selectedWorkout} leaveWorkout={leaveWorkout} auth={auth} user={user} />
       {selectedWorkout ? 
-        <RaceWorkout socket={socket} user={user} selectedWorkout={selectedWorkout} leaveWorkout={leaveWorkout} /> : 
+        <RaceWorkout socket={socket} user={user} selectedWorkout={selectedWorkout} /> : 
         <Workouts socket={socket} pickWorkout={pickWorkout} />}
     </div>
   )

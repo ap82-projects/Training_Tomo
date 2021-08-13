@@ -50,7 +50,9 @@ io.on('connection', socket => {
   });
 
   socket.on('leaveWorkout', idAndWorkout => {
-    delete workoutRooms[idAndWorkout.workout][idAndWorkout.userId];
+    if (workoutRooms[idAndWorkout.workout] && workoutRooms[idAndWorkout.workout][idAndWorkout.userId]) {
+      delete workoutRooms[idAndWorkout.workout][idAndWorkout.userId];
+    }
     console.log(workoutRooms);
     if(!Object.keys(workoutRooms[idAndWorkout.workout]).length) {
       delete workoutRooms[idAndWorkout.workout];

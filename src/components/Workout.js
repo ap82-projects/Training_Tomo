@@ -1,5 +1,5 @@
 import React from "react"
-import Button from "react-bootstrap/Button"
+// import Button from "react-bootstrap/Button"
 import Card from "react-bootstrap/Card"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
@@ -31,7 +31,8 @@ export default function Workout(props) {
         </Card.Body>
         <Card.Footer>
           {/* <Button id={workout.id} variant="success" onClick={(e) => pickWorkout(e.target.id)}>Join Workout</Button> */}
-          <Button id={workout.id} variant="success" onClick={(e) => pickWorkout(workout)}>Join Workout</Button>
+          {/* <Button id={workout.id} variant="success" onClick={(e) => pickWorkout(workout)}>Join Workout</Button> */}
+          <button id={workout.id} type="button" className="btn btn-success" onClick={(e) => pickWorkout(workout)}>Join Workout</button>
         </Card.Footer>
       </Card>
   )
