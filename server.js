@@ -10,7 +10,7 @@ app.use(express.json());
 app.use(express.static('build'));
 
 const server = app.listen(port, () => {
-  console.log(`express listening on port :${port}`);
+  console.log(`express listening on port: ${port}`);
 });
 
 const workoutRooms = {}
