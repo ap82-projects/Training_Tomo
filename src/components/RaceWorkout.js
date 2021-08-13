@@ -1,8 +1,4 @@
 import React, { useState, useEffect } from "react"
-// import Button from "react-bootstrap/Button"
-// import Card from "react-bootstrap/Card"
-// import Row from "react-bootstrap/Row"
-// import Col from "react-bootstrap/Col"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function RaceWorkout(props) {
@@ -66,7 +62,6 @@ export default function RaceWorkout(props) {
           </div>
           <div className="col">
             {roomStatus[selectedWorkout.id][user].progress.map((completed, i) => (
-              // <Button variant={completed ? "primary" : "warning"} />
               <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} />
             ))}
           </div>
@@ -81,9 +76,7 @@ export default function RaceWorkout(props) {
 
   const SelfProgress = Object.keys(roomStatus).length 
     ? roomStatus[selectedWorkout.id][user.providerData[0].uid].progress
-      // .map((completed, i) => <Button variant={completed ? "primary" : "warning"} />) 
       .map((completed, i) => <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} />) 
-    // : <Button variant="warning">Loading</Button>
     : <button type="button" className="btn btn-warning">Loading</button>
 
   const raceStatus = () => {
@@ -93,7 +86,6 @@ export default function RaceWorkout(props) {
           <React.Fragment>
             <h1>GO!!!</h1>
             <h2>{selectedWorkout.exercises[currentExercise].name} x{selectedWorkout.exercises[currentExercise].reps}</h2>
-            {/* <Button variant="primary" onClick={() => complete()}>Finished Exercise</Button> */}
             <button type="button" className="btn btn-primary" onClick={() => complete()}>Finished Exercise</button>
           </React.Fragment>
         );
@@ -101,7 +93,6 @@ export default function RaceWorkout(props) {
         return (
           <React.Fragment>
             <h1>SET...</h1>
-            {/* <Button variant="warning">...</Button> */}
             <button type="button" className="btn btn-warning">...</button>
           </React.Fragment>
         );
@@ -109,7 +100,6 @@ export default function RaceWorkout(props) {
         return (
           <React.Fragment>
             <h1>READY?</h1>
-            {/* <Button variant="danger" onClick={() => makeReady()}>I'm Ready!</Button> */}
             <button type="button" className="btn btn-danger" onClick={() => makeReady()}>I'm Ready!</button>
           </React.Fragment>
         );
@@ -133,8 +123,6 @@ export default function RaceWorkout(props) {
       {OtherUsers}
       {SelfProgress}
       {raceStatus()}
-      {/* <h1>GO!!!</h1> */}
-      {/* <Button variant="success" onClick={() => complete()}>Finished Exercise</Button> */}
     </div>
   )
 }
