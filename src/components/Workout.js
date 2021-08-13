@@ -1,8 +1,4 @@
 import React from "react"
-// import Button from "react-bootstrap/Button"
-// import Card from "react-bootstrap/Card"
-// import Row from "react-bootstrap/Row"
-// import Col from "react-bootstrap/Col"
 
 export default function Workout(props) {
   const {
@@ -22,7 +18,7 @@ export default function Workout(props) {
   ))
 
   return (
-      <div className="card m-d" style={{ color: "black", width:"50%" }}>
+      <div className="Workout card m-d" style={{ color: "black", width:"50%" }}>
         <div className="card-header">
           <h5 className="card-title">{workout.name}</h5>
         </div>
@@ -30,8 +26,6 @@ export default function Workout(props) {
           {exercises}
         </div>
         <div className="card-footer">
-          {/* <Button id={workout.id} variant="success" onClick={(e) => pickWorkout(e.target.id)}>Join Workout</Button> */}
-          {/* <Button id={workout.id} variant="success" onClick={(e) => pickWorkout(workout)}>Join Workout</Button> */}
           <button id={workout.id} type="button" className="btn btn-success" onClick={(e) => pickWorkout(workout)}>Join Workout</button>
         </div>
       </div>

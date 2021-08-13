@@ -9,7 +9,8 @@ export default function RaceWorkout(props) {
   const {
     socket,
     user,
-    selectedWorkout
+    selectedWorkout,
+    windowHeight
   } = props;
   const [roomStatus, setRoomStatus] = useState({});
   const [winner, setWinner] = useState("");
@@ -54,10 +55,13 @@ export default function RaceWorkout(props) {
   const OtherUsers = Object.keys(roomStatus).length ? Object.keys(roomStatus[selectedWorkout.id])
     .filter(e => e !== user.providerData[0].uid)
     .map(user => (
-      <div className="card">
-        <div className="row">
-          <div className="col">
-            <img className="card-img" src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout.id][user].name)}?set=set3`} />
+      <div className="card" style={{ height: `${windowHeight * .2}px` }}>
+        <div className="row" style={{ height: "100%" }}>
+          <div className="col" style={{ height: "100%" }}>
+            <img className="card-img"
+              style={{ height: "75%", objectFit: "contain"}}
+              src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout.id][user].name)}?set=set3`}
+            />
             <p className="card-text">{roomStatus[selectedWorkout.id][user].ready ? "Ready" : "Waiting"}</p>
           </div>
           <div className="col">
@@ -124,7 +128,7 @@ export default function RaceWorkout(props) {
   }
 
   return (
-    <div>
+    <div className="RaceWorkout">
       {/* {otherUsers.length ? {OtherUsers} : <h2>No Other Users</h2> } */}
       {OtherUsers}
       {SelfProgress}

@@ -8,6 +8,7 @@ import io from 'socket.io-client';
 export default function HomePage(props) {
   const { user, auth } = props;
   const [selectedWorkout, setSelectedWorkout] = useState();
+  const [windowHeight] = useState(window.innerHeight);
   const socket = io();
   
   socket.emit('message', `${user.displayName}`)
@@ -27,10 +28,16 @@ export default function HomePage(props) {
 
   return (
     <div className="HomePage">
-      <UserHeader selectedWorkout={selectedWorkout} leaveWorkout={leaveWorkout} auth={auth} user={user} />
+      <UserHeader
+        selectedWorkout={selectedWorkout}
+        leaveWorkout={leaveWorkout}
+        auth={auth}
+        user={user}
+        windowHeight={windowHeight}
+      />
       {selectedWorkout ? 
-        <RaceWorkout socket={socket} user={user} selectedWorkout={selectedWorkout} /> : 
-        <Workouts socket={socket} pickWorkout={pickWorkout} />}
+        <RaceWorkout socket={socket} user={user} selectedWorkout={selectedWorkout} windowHeight={windowHeight} /> : 
+        <Workouts socket={socket} pickWorkout={pickWorkout} windowHeight={windowHeight} />}
     </div>
   )
 }
