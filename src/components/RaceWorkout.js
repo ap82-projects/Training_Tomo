@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 // import Button from "react-bootstrap/Button"
-import Card from "react-bootstrap/Card"
-import Row from "react-bootstrap/Row"
-import Col from "react-bootstrap/Col"
+// import Card from "react-bootstrap/Card"
+// import Row from "react-bootstrap/Row"
+// import Col from "react-bootstrap/Col"
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function RaceWorkout(props) {
@@ -54,20 +54,20 @@ export default function RaceWorkout(props) {
   const OtherUsers = Object.keys(roomStatus).length ? Object.keys(roomStatus[selectedWorkout.id])
     .filter(e => e !== user.providerData[0].uid)
     .map(user => (
-      <Card>
-        <Row>
-          <Col>
-            <Card.Img src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout.id][user].name)}?set=set3`} />
-            <Card.Text>{roomStatus[selectedWorkout.id][user].ready ? "Ready" : "Waiting"}</Card.Text>
-          </Col>
-          <Col>
+      <div className="card">
+        <div className="row">
+          <div className="col">
+            <img className="card-img" src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout.id][user].name)}?set=set3`} />
+            <p className="card-text">{roomStatus[selectedWorkout.id][user].ready ? "Ready" : "Waiting"}</p>
+          </div>
+          <div className="col">
             {roomStatus[selectedWorkout.id][user].progress.map((completed, i) => (
               // <Button variant={completed ? "primary" : "warning"} />
               <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} />
             ))}
-          </Col>
-        </Row>
-      </Card>
+          </div>
+        </div>
+      </div>
     )) : <h2>No Other Users</h2>
   // console.log(otherUsers)
   console.log("room status")
