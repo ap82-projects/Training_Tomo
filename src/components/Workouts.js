@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import 'bootstrap/dist/css/bootstrap.min.css'
 import Workout from './Workout';
 
 export default function Workouts(props) {
@@ -16,12 +15,12 @@ export default function Workouts(props) {
     });
     console.log('Workouts')
     console.log(workouts)
-  })
-  socket.on('getWorkouts', data => {
-    if (data) {
-      setWorkouts(data);
-    };
-  });
+  }, [])
+  // socket.on('getWorkouts', data => {
+  //   if (data) {
+  //     setWorkouts(data);
+  //   };
+  // });
   
   const availableWorkouts = workouts
     .filter(e => e.available)

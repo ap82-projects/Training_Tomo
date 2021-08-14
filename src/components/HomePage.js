@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import 'bootstrap/dist/css/bootstrap.min.css'
 import UserHeader from './UserHeader';
 import Workouts from './Workouts';
 import RaceWorkout from './RaceWorkout';

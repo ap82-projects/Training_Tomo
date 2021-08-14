@@ -5,10 +5,10 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import 'bootstrap/dist/css/bootstrap.min.css'
 // import io from 'socket.io-client';
 // import { useCollectionData } from 'react-firebase-hooks/firestore';
-require('dotenv').config();
-console.log('pre')
+
 firebase.initializeApp({
   apiKey: process.env.REACT_APP_API_KEY,
   authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -17,7 +17,7 @@ firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_APP_ID
 });
-console.log('post')
+
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
@@ -26,11 +26,7 @@ function App() {
   
   return (
     <div className="App">
-      {/* <header className="App-header"> */}
-      <section>
-        {user ? <HomePage user={user} auth={auth} firestore={firestore}/> : <SignIn />}
-      </section>
-      {/* </header> */}
+        {user ? <HomePage user={user} auth={auth} /> : <SignIn />}
     </div>
   );
 }
@@ -41,7 +37,6 @@ function SignIn() {
     const provider = new firebase.auth.GoogleAuthProvider();
     auth.signInWithPopup(provider);
   }
-
   return(
     <button onClick={signInWithGoogle}>Sign in with Google</button>
   )

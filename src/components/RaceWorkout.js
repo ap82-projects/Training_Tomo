@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react"
-import 'bootstrap/dist/css/bootstrap.min.css'
 
 export default function RaceWorkout(props) {
   const {
@@ -22,12 +21,11 @@ export default function RaceWorkout(props) {
   });
   socket.on('roomStatus', status => {
     setRoomStatus(status);
-    // console.log('room status')
+    console.log('room status')
     console.log(status)
-    // console.log(status)
   });
-  socket.on('allReady', letsGo => {
-    setAllReady(true);
+  socket.on('allReady', ready => {
+    setAllReady(ready);
   });
   socket.on('winner', user => {
     setWinner(user);
@@ -51,10 +49,7 @@ export default function RaceWorkout(props) {
   const OtherUsers = Object.keys(roomStatus).length ? Object.keys(roomStatus[selectedWorkout.id])
     .filter(e => e !== user.providerData[0].uid)
     .map(user => (
-      // <div className="card-sm shadow-md" style={{ height: `${windowHeight * .2}px` }}>
       <div className="card-sm shadow-sm" style={{ height: `${windowHeight * .1}px` }} key={user}>
-        {/* <div className="row" style={{ height: "100%" }}> */}
-          {/* <div className="col" style={{ height: "100%" }}> */}
             <img className="img-fluid"
               style={{ height: "75%" }}
               src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout.id][user].name)}?set=set3`}
@@ -63,8 +58,6 @@ export default function RaceWorkout(props) {
               <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} />
             ))}
             <p className="card-text">{roomStatus[selectedWorkout.id][user].ready ? "Ready" : "Waiting"}</p>
-          {/* </div> */}
-        {/* </div> */}
       </div>
     )) : <h2>No Other Users</h2>
   // console.log(otherUsers)
@@ -118,7 +111,6 @@ export default function RaceWorkout(props) {
 
   return (
     <div className="RaceWorkout">
-      {/* {otherUsers.length ? {OtherUsers} : <h2>No Other Users</h2> } */}
       {OtherUsers}
       {raceStatus()}
       <div>
