@@ -18,7 +18,8 @@ export default function Workout(props) {
   ))
 
   return (
-      <div className="Workout card m-d" style={{ color: "black", width:"50%" }}>
+      // <div className="Workout card m-d" style={{ color: "black", width:"50%" }}>
+      <div className="Workout card-md">
         <div className="card-header">
           <h5 className="card-title">{workout.name}</h5>
         </div>
