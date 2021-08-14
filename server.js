@@ -50,13 +50,19 @@ io.on('connection', socket => {
   });
 
   socket.on('leaveWorkout', idAndWorkout => {
-    if (workoutRooms[idAndWorkout.workout] && workoutRooms[idAndWorkout.workout][idAndWorkout.userId]) {
-      delete workoutRooms[idAndWorkout.workout][idAndWorkout.userId];
+    console.log('leaveWorkout start: idAndWorkout')
+    console.log(idAndWorkout)
+    console.log('leaveWorkout 0: workoutRooms')
+    console.log(workoutRooms)
+    if (workoutRooms[idAndWorkout.workout.id] && workoutRooms[idAndWorkout.workout.id][idAndWorkout.userId]) {
+      delete workoutRooms[idAndWorkout.workout.id][idAndWorkout.userId];
     }
+    console.log('leaveWorkout 1: workoutRooms')
     console.log(workoutRooms);
-    if(!Object.keys(workoutRooms[idAndWorkout.workout]).length) {
-      delete workoutRooms[idAndWorkout.workout];
+    if(workoutRooms[idAndWorkout.workout.id] && !Object.keys(workoutRooms[idAndWorkout.workout.id]).length) {
+      delete workoutRooms[idAndWorkout.workout.id];
     }
+    console.log('leaveWorkout 2: workoutRooms')
     console.log(workoutRooms);
     io.emit('roomStatus', workoutRooms)
   });

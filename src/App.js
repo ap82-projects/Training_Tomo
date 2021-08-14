@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import HomePage from './components/HomePage';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import 'bootstrap/dist/css/bootstrap.min.css'
 // import io from 'socket.io-client';
 // import { useCollectionData } from 'react-firebase-hooks/firestore';
 
@@ -18,6 +18,7 @@ firebase.initializeApp({
   appId: process.env.REACT_APP_APP_ID
 });
 
+// const socket = io()
 const auth = firebase.auth();
 const firestore = firebase.firestore();
 
@@ -27,6 +28,7 @@ function App() {
   return (
     <div className="App">
         {user ? <HomePage user={user} auth={auth} /> : <SignIn />}
+        {/* {user ? <HomePage user={user} auth={auth} socket={socket} /> : <SignIn />} */}
     </div>
   );
 }

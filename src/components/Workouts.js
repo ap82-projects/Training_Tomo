@@ -12,6 +12,8 @@ export default function Workouts(props) {
   useEffect(() => {
     socket.on('getWorkouts', data => {
       if (data) setWorkouts(data);
+      console.log('data')
+      console.log(data)
     });
     console.log('Workouts')
     console.log(workouts)

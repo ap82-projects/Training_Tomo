@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 
 export default function HomePage(props) {
   const { user, auth } = props;
-  const [selectedWorkout, setSelectedWorkout] = useState();
+  const [selectedWorkout, setSelectedWorkout] = useState("");
   const [windowHeight] = useState(window.innerHeight);
   const socket = io();
   
@@ -21,6 +21,7 @@ export default function HomePage(props) {
   }
 
   const leaveWorkout = workoutId => {
+    console.log('leaving workout ', workoutId)
     socket.emit('leaveWorkout', {userId: user.providerData[0].uid, userName: user.displayName, workout: workoutId})
     setSelectedWorkout("");
   }

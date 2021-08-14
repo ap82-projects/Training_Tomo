@@ -25,7 +25,7 @@ export default function RaceWorkout(props) {
     console.log(status)
   });
   socket.on('allReady', ready => {
-    setAllReady(ready);
+    setAllReady(true);
   });
   socket.on('winner', user => {
     setWinner(user);
@@ -55,7 +55,7 @@ export default function RaceWorkout(props) {
               src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout.id][user].name)}?set=set3`}
             />
             {roomStatus[selectedWorkout.id][user].progress.map((completed, i) => (
-              <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} />
+              <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} key={i} />
             ))}
             <p className="card-text">{roomStatus[selectedWorkout.id][user].ready ? "Ready" : "Waiting"}</p>
       </div>
@@ -63,6 +63,7 @@ export default function RaceWorkout(props) {
   // console.log(otherUsers)
   console.log("room status")
   console.log(roomStatus)
+  console.log("other users")
   console.log(OtherUsers)
   // console.log(Boolean(Object.keys(roomStatus).length))
 
