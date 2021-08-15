@@ -68,6 +68,7 @@ io.on('connection', socket => {
   });
 
   socket.on('completedExercise', idAndWorkout => {
+    console.log('completed exercise')
     workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress.unshift(true);
     workoutRooms[idAndWorkout.workout][idAndWorkout.userId].progress.pop();
     console.log(workoutRooms[idAndWorkout.workout][idAndWorkout.userId])
@@ -79,6 +80,7 @@ io.on('connection', socket => {
   });
 
   socket.on('ready', readyUser => {
+    console.log('ready')
     workoutRooms[readyUser.workout][readyUser.userId].ready = true;
     io.emit('roomStatus', workoutRooms);
     const areAllReady = Object.keys(workoutRooms[readyUser.workout])
