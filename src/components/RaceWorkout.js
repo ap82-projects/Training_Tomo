@@ -15,24 +15,6 @@ export default function RaceWorkout(props) {
   const [hasOtherUsers, setHasOtherUsers] = useState(false);
   const [otherUsers, setOtherUsers] = useState(<h2>Loading</h2>);
   const [selfProgress, setSelfProgress] = useState(<button type="button" className="btn btn-warning">Loading Progress Bar</button>)
-  // console.log("selectedWorkout")
-  // console.log(selectedWorkout)
-  
-  // socket.on('completedExercise', nameAndWorkout => {
-  //   console.log('completed exercise')
-  //   console.log(nameAndWorkout);
-  // });
-  // socket.on('roomStatus', status => {
-  //   setRoomStatus(status);
-  //   console.log('room status')
-  //   console.log(status)
-  // });
-  // socket.on('allReady', ready => {
-  //   setAllReady(true);
-  // });
-  // socket.on('winner', user => {
-  //   setWinner(user);
-  // })
   
   useEffect(() => {
     console.log("selectedWorkout")
@@ -88,29 +70,6 @@ export default function RaceWorkout(props) {
         : <button type="button" className="btn btn-warning">Loading Progress Bar</button>
       )
     }
-    // setOtherUsers(roomStatus[selectedWorkout.id] && Object.keys(roomStatus[selectedWorkout.id]).length > 1
-    //   ? Object.keys(roomStatus[selectedWorkout.id])
-    //     .filter(e => e !== user.providerData[0].uid)
-    //     .map(user => (
-    //       <div className="card-sm shadow-sm" style={{ height: `${windowHeight * .15}px` }} key={user}>
-    //         <img className="img-fluid"
-    //           style={{ height: "75%" }}
-    //           src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout.id][user].name)}?set=set3`}
-    //         />
-    //         {roomStatus[selectedWorkout.id][user].progress.map((completed, i) => (
-    //           <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} key={i} />
-    //         ))}
-    //         <p className="card-text">{roomStatus[selectedWorkout.id][user].ready ? "Ready" : "Waiting"}</p>
-    //       </div>
-    //     ))
-    //   : <h2>Waiting For Other Users</h2>
-    // )
-
-    // setSelfProgress(Object.keys(roomStatus).length
-    //   ? roomStatus[selectedWorkout.id][user.providerData[0].uid].progress
-    //     .map((completed, i) => <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} />)
-    //   : <button type="button" className="btn btn-warning">Loading Progress Bar</button>
-    // )
   }, [roomStatus])
 
 
@@ -123,43 +82,6 @@ export default function RaceWorkout(props) {
     setReady(true);
     socket.emit('ready', { userId: user.providerData[0].uid, workout: selectedWorkout.id })
   }
-
-  // const OtherUsers = Object.keys(roomStatus).length ? Object.keys(roomStatus[selectedWorkout.id])
-  //   // .filter(e => e !== user.providerData[0].uid)
-  //   .filter(e => {
-  //     console.log('e')
-  //     console.log(e)
-  //     console.log('user uid')
-  //     console.log(user.providerData[0].uid)
-  //     console.log('to return: ', e !== user.providerData[0].uid)
-  //     console.log('user')
-  //     console.log(user)
-  //     return e !== user.providerData[0].uid
-  //   })
-  //   .map(user => (
-  //     <div className="card-sm shadow-sm" style={{ height: `${windowHeight * .1}px` }} key={user}>
-  //           <img className="img-fluid"
-  //             style={{ height: "75%" }}
-  //             src={`https://robohash.org/${encodeURIComponent(roomStatus[selectedWorkout.id][user].name)}?set=set3`}
-  //           />
-  //           {roomStatus[selectedWorkout.id][user].progress.map((completed, i) => (
-  //             <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} key={i} />
-  //           ))}
-  //           <p className="card-text">{roomStatus[selectedWorkout.id][user].ready ? "Ready" : "Waiting"}</p>
-  //     </div>
-  //   )) : <h2>No Other Users</h2>
-  // console.log(otherUsers)
-  console.log("room status")
-  console.log(roomStatus)
-  console.log("other users")
-  // console.log(OtherUsers)
-  console.log(otherUsers)
-  // console.log(Boolean(Object.keys(roomStatus).length))
-
-  const SelfProgress = Object.keys(roomStatus).length
-    ? roomStatus[selectedWorkout.id][user.providerData[0].uid].progress
-      .map((completed, i) => <button type="button" className={`btn btn-${completed ? "primary" : "warning"}`} />)
-    : <button type="button" className="btn btn-warning">Loading</button>
 
   const raceStatus = () => {
     if (!winner) {
@@ -205,11 +127,9 @@ export default function RaceWorkout(props) {
 
   return (
     <div className="RaceWorkout">
-      {/* {OtherUsers} */}
       {otherUsers}
       {raceStatus()}
       <div>
-        {/* {SelfProgress} */}
         {selfProgress}
       </div>
     </div>

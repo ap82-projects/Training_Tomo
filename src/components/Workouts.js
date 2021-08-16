@@ -18,11 +18,6 @@ export default function Workouts(props) {
     console.log('Workouts')
     console.log(workouts)
   }, [])
-  // socket.on('getWorkouts', data => {
-  //   if (data) {
-  //     setWorkouts(data);
-  //   };
-  // });
   
   const availableWorkouts = workouts
     .filter(e => e.available)

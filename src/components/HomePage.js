@@ -8,9 +8,10 @@ export default function HomePage(props) {
   const { user, auth } = props;
   const [selectedWorkout, setSelectedWorkout] = useState("");
   const [windowHeight] = useState(window.innerHeight);
-  const socket = io();
-  
+  const socket = io();  
+  console.log('Emitting user name')
   socket.emit('message', `${user.displayName}`)
+
   
   const pickWorkout = workout => {
     console.log('workout')

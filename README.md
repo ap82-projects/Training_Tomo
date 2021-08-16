@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+# Training Tomo
+This is an app I wrote during my time as a student at Code Chrysalis.  It is a simple app that can be used for people who want to workout with others but cannot due to various reasons (proximity from gym, social distancing, etc.).  It's current implementation has users rece to complete workouts.  You can see a live version by clicking the link below.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[Training Tomo on Heroku](https://training-tomo.herokuapp.com/)
 
-## Available Scripts
+## Technologies Used
+### Node.js
+Node.js was used to write the server backend using express to facilitate communication between users via Socket.io
 
-In the project directory, you can run:
+### Socket.io
+Socket.io is used for communication between the client and server as well as client to client communication.  This communication is used to show users in realtime what workouts are available as well as showing other users' progress in the current workout room.
 
-### `yarn start`
+### React
+React is used for the front end for this app
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Bootstrap
+Bootstrap is used for styling the look of the front end
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Firebase
+Firebase is used for login and authentication of users
 
-### `yarn test`
+### Heroku
+Heroku is used to host the app on the web as well as for CI/CD.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### [Robohash](https://robohash.org/)
+Robohash is used to generate robot heads to represent users in the navigation bar as well as in the workout rooms.
 
-### `yarn build`
+## Future Features
+### Different Types of Workout Rooms
+Currently the only type of workout is a race type.  I would like to implement other types of workout rooms for different purposes (working out with a partner, coaching as or being coached by a personal trainer, etc.)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Adding User Customizable Workouts
+As of right now the workouts are hardcoded into the program as a proof of concept.  In the future users should be able to upload their own workouts for others to join in
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Workout Search
+Once workouts can be added by users, they need to be able to search through them to find the workout that best suits what they are looking for.
